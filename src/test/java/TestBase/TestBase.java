@@ -1,5 +1,6 @@
 package TestBase;
 
+import Utility.ScreenShotOnFailure;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.ExtentSparkReporterConfig;
 import com.aventstack.extentreports.reporter.configuration.Theme;
@@ -17,9 +18,6 @@ import java.util.concurrent.TimeUnit;
 public abstract class TestBase {
     public static JavascriptExecutor js;
     public static WebDriver driver;
-    protected static ExtentReports extent;
-    ExtentSparkReporter sparkReporter;
-    protected ExtentTest test;
 
     @BeforeTest
     public void setUp() {
@@ -37,15 +35,18 @@ public abstract class TestBase {
             }
         };
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait( 30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().deleteAllCookies();
-            String baseURL = "https://www.imdb.com/";
+        String baseURL = "https://www.imdb.com/";
         driver.get(baseURL);
         System.out.println("Starting test: " + getClass());
     }
 
     @AfterTest
-    public void tearDown() {
-        driver.quit();
+    public void tearDown(ITestResult result) {
+        if (ITestResult.SUCCESS == result.getStatus()) {
+            System.out.println("The test " + getClass() + " was successfully finished");
+            driver.quit();
+        }
     }
 }

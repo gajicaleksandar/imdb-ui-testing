@@ -1,4 +1,4 @@
-package Tests.LoginTest;
+package Tests.WatchlistTest;
 
 import Pages.Header;
 import Pages.LoginPage;
@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Test2 extends TestBase {
+public class WatchlistTest extends TestBase {
     Header header;
     LoginPage loginPage;
 
@@ -36,7 +36,7 @@ public class Test2 extends TestBase {
     }
 
     @Test
-    public void test2() throws InterruptedException {
+    public void LoginTest() throws InterruptedException {
         String currentUrl = driver.getCurrentUrl();
             System.out.println("Current URL: " + currentUrl);
         String expectedUrl = "https://www.imdb.com/";
@@ -52,13 +52,17 @@ public class Test2 extends TestBase {
         Assert.assertTrue(loginPage.checkBoxDetails_ISDP());
         loginPage.clickButtonCloseDetails();
         //credentials
-        loginPage.inputFieldEmail("wrongemail@gmail.com"); //login email = wrong
+        loginPage.inputFieldEmail("alexandar0702@gmail.com"); //login email = correct
         loginPage.inputFieldPassword("DelijeSever1989"); //login password = correct
         loginPage.clickButtonCheckKeepSignedIn();
         loginPage.clickButtonAcceptSignIn();
         Thread.sleep(1000);
-        Assert.assertTrue(loginPage.checkBoxAuthErrorLogin_ISDP());
-        header.clickButtonUserProfile();
-        header.clickOnButtonSignOut();
+        Assert.assertTrue(header.checkButtonUserProfile_ISDP());
     }
+
+    @Test
+    public void test() throws InterruptedException {
+        //step 2, this will continue
+    }
+
 }

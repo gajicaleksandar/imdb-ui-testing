@@ -35,22 +35,17 @@ public class Test1 extends TestBase {
         */
     }
 
-    /*
-    add features - exception handling, integration with jmeter, jenkins, listeners, reporters
-     */
-
     @Test
     public void test1() throws InterruptedException {
         String currentUrl = driver.getCurrentUrl();
-        System.out.println("Current URL: " + currentUrl);
+            System.out.println("Current URL: " + currentUrl);
         String expectedUrl = "https://www.imdb.com/";
-        System.out.println("Expected URL: " + expectedUrl);
+            System.out.println("Expected URL: " + expectedUrl);
 
         Assert.assertTrue(Objects.equals(currentUrl, expectedUrl));
         if (currentUrl.equals(expectedUrl)) {
             System.out.println("URL is correct: " + currentUrl);
         }
-
         header.clickOnButtonSignIn();
         loginPage.clickOnSignInWithImdb();
         loginPage.clickButtonDetails();

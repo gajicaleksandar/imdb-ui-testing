@@ -38,9 +38,9 @@ public class Test3 extends TestBase {
     @Test
     public void test3() throws InterruptedException {
         String currentUrl = driver.getCurrentUrl();
-        System.out.println("Current URL: " + currentUrl);
+            System.out.println("Current URL: " + currentUrl);
         String expectedUrl = "https://www.imdb.com/";
-        System.out.println("Expected URL: " + expectedUrl);
+            System.out.println("Expected URL: " + expectedUrl);
 
         Assert.assertTrue(Objects.equals(currentUrl, expectedUrl));
         if (currentUrl.equals(expectedUrl)) {
