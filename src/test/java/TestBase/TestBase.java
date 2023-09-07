@@ -28,7 +28,6 @@ public abstract class TestBase {
             public Object executeScript(String script, Object... args) {
                 return null;
             }
-
             @Override
             public Object executeAsyncScript(String script, Object... args) {
                 return null;
@@ -43,10 +42,7 @@ public abstract class TestBase {
     }
 
     @AfterTest
-    public void tearDown(ITestResult result) {
-        if (ITestResult.SUCCESS == result.getStatus()) {
-            System.out.println("The test " + getClass() + " was successfully finished");
-            driver.quit();
-        }
+    public void tearDown() {
+        driver.quit();
     }
 }

@@ -29,6 +29,9 @@ public class Test1 extends TestBase {
         if (ITestResult.FAILURE == result.getStatus()) {
             ScreenShotOnFailure.TakingScreenshot(driver, result.getName());
         }
+        else {
+            System.out.println("The test " + getClass() + " was successfully finished!");
+        }
         /*
         A screenshot is captured only on failure in any test
         Screenshots are stored in a folder named "screenshots" and each new screenshot is named "ScreenshotFailure + test name.png"
@@ -44,7 +47,7 @@ public class Test1 extends TestBase {
 
         Assert.assertTrue(Objects.equals(currentUrl, expectedUrl));
         if (currentUrl.equals(expectedUrl)) {
-            System.out.println("URL is correct: " + currentUrl);
+            System.out.println("URL is correct!");
         }
         header.clickOnButtonSignIn();
         loginPage.clickOnSignInWithImdb();
@@ -53,7 +56,7 @@ public class Test1 extends TestBase {
         loginPage.clickButtonCloseDetails();
         //credentials
         loginPage.inputFieldEmail("alexandar0702@gmail.com"); //login email = correct
-        loginPage.inputFieldPassword("DelijeSever1989"); //login password = correct
+        loginPage.inputFieldPassword("Alexandar0702@"); //login password = correct
         loginPage.clickButtonCheckKeepSignedIn();
         loginPage.clickButtonAcceptSignIn();
         Thread.sleep(1000);
