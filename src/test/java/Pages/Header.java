@@ -50,4 +50,12 @@ public class Header extends TestBase {
         Thread.sleep(1000);
         ButtonSignOut.click();
     }
+
+    By buttonWatchlist = By.xpath("//div[@class= 'sc-gScZFl jVzBBm imdb-header__watchlist-button']");
+    public void clickOnButtonWatchlist() throws InterruptedException {
+        WebElement ButtonWatchlist = driver.findElement(buttonWatchlist);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", ButtonWatchlist);
+        Thread.sleep(1000);
+        ButtonWatchlist.click();
+    }
 }

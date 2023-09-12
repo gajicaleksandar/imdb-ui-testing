@@ -6,8 +6,10 @@ import com.aventstack.extentreports.reporter.configuration.ExtentSparkReporterCo
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterTest;
@@ -20,7 +22,7 @@ public abstract class TestBase {
     public static WebDriver driver;
 
     @BeforeTest
-    public void setUp() {
+    public void setUp() throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", "C:/Users/gordi/aleksandar gajic/libs/chromedriver/chromedriver.exe");
         driver = new ChromeDriver();
         js = new JavascriptExecutor() {
@@ -38,11 +40,12 @@ public abstract class TestBase {
         driver.manage().deleteAllCookies();
         String baseURL = "https://www.imdb.com/";
         driver.get(baseURL);
-        System.out.println("Starting test: " + getClass());
+        System.out.println("- The Test " + getClass() + " is started!");
     }
 
     @AfterTest
     public void tearDown() {
+        System.out.println("- The test " + getClass() + " was finished!");
         driver.quit();
     }
 }

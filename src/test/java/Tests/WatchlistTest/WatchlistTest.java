@@ -28,9 +28,10 @@ public class WatchlistTest extends TestBase {
 
         if (ITestResult.FAILURE == result.getStatus()) {
             ScreenShotOnFailure.TakingScreenshot(driver, result.getName());
+            System.out.println("- The test " + getClass() + " failed!");
         }
         else {
-            System.out.println("The test " + getClass() + " was successfully finished!");
+            System.out.println("- No errors");
         }
         /*
         A screenshot is captured only on failure in any test
@@ -65,7 +66,18 @@ public class WatchlistTest extends TestBase {
 
     @Test
     public void test() throws InterruptedException {
-        //step 2, this will continue
+        String currentUrl = driver.getCurrentUrl();
+            System.out.println("Current URL: " + currentUrl);
+        String expectedUrl = "https://www.imdb.com/";
+            System.out.println("Expected URL: " + expectedUrl);
+
+        Assert.assertTrue(Objects.equals(currentUrl, expectedUrl));
+        if (currentUrl.equals(expectedUrl)) {
+            System.out.println("URL is correct!");
+        }
+        header.clickOnButtonWatchlist();
+        //continue...
+
     }
 
 }

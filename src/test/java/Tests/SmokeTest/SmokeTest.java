@@ -28,9 +28,10 @@ public class SmokeTest extends TestBase {
 
         if (ITestResult.FAILURE == result.getStatus()) {
             ScreenShotOnFailure.TakingScreenshot(driver, result.getName());
+            System.out.println("- The test " + getClass() + " failed!");
         }
         else {
-            System.out.println("The test " + getClass() + " was successfully finished!");
+            System.out.println("- No errors");
         }
         /*
         A screenshot is captured only on failure in any test
@@ -66,7 +67,7 @@ public class SmokeTest extends TestBase {
     @Test
     public void test() throws InterruptedException {
 
-        //step 2, this will continue - Watchlist test, translate test...
+        //step 2, this will continue - Watchlist test, translate test, search test, check pages, play video...
 
     }
 

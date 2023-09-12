@@ -28,9 +28,10 @@ public class Test3 extends TestBase {
 
         if (ITestResult.FAILURE == result.getStatus()) {
             ScreenShotOnFailure.TakingScreenshot(driver, result.getName());
+            System.out.println("- The test " + getClass() + " failed!");
         }
         else {
-            System.out.println("The test " + getClass() + " was successfully finished!");
+            System.out.println("- No errors");
         }
         /*
         A screenshot is captured only on failure in any test

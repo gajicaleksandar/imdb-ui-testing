@@ -9,13 +9,28 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import java.util.Random;
 
 import java.io.IOException;
 import java.util.Objects;
 
-public class Test4 extends TestBase {
+public class RegistrationTest extends TestBase {
     Header header;
     LoginPage loginPage;
+
+    public static String generateRandomString(int length) {
+        String characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder stringBuilder = new StringBuilder();
+
+        Random random = new Random();
+
+        for (int i = 0; i < length; i++) {
+            int randomIndex = random.nextInt(characters.length());
+            char randomChar = characters.charAt(randomIndex);
+            stringBuilder.append(randomChar);
+        }
+        return stringBuilder.toString();
+    }
 
     @BeforeTest
     public void setUpTest() {
@@ -40,7 +55,8 @@ public class Test4 extends TestBase {
     }
 
     @Test
-    public void test4() throws InterruptedException {
+    public void test1() throws InterruptedException {
+
         String currentUrl = driver.getCurrentUrl();
             System.out.println("Current URL: " + currentUrl);
         String expectedUrl = "https://www.imdb.com/";
@@ -51,18 +67,17 @@ public class Test4 extends TestBase {
             System.out.println("URL is correct!");
         }
         header.clickOnButtonSignIn();
-        loginPage.clickOnSignInWithImdb();
-        loginPage.clickButtonDetails();
-        Assert.assertTrue(loginPage.checkBoxDetails_ISDP());
-        loginPage.clickButtonCloseDetails();
-        //credentials
-        loginPage.inputFieldEmail("wrongemail@gmail.com"); //login email = wrong
-        loginPage.inputFieldPassword("wrongpassword"); //login password = wrong
-        loginPage.clickButtonCheckKeepSignedIn();
+        loginPage.clickButtonCreateNewAccount();
+        loginPage.inputFieldYourName("Test123");
+            String randomEmail = generateRandomString(5) + "@gmail.com";
+            System.out.println("Generated email is: " + randomEmail);
+        loginPage.inputFieldEmail(randomEmail);
+            String randomPassword = generateRandomString(10);
+            System.out.println("Generated password is: " + randomPassword);
+        loginPage.inputFieldPassword(randomPassword);
+        loginPage.inputFieldRePassword(randomPassword);
         loginPage.clickButtonAcceptSignIn();
-        Thread.sleep(1000);
-        Assert.assertTrue(loginPage.checkBoxAuthErrorLogin_ISDP());
-        header.clickButtonUserProfile();
-        header.clickOnButtonSignOut();
+        Assert.assertTrue(loginPage.checkH1VerifyEmail_ISDP());
+        Thread.sleep(2000);
     }
 }

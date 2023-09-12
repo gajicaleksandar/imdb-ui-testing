@@ -22,6 +22,14 @@ public class LoginPage extends TestBase {
         SignInWithImdb.click();
     }
 
+    By buttonCreateNewAccount = By.xpath("//a[@class = 'list-group-item create-account ']");
+    public void clickButtonCreateNewAccount() throws InterruptedException {
+        WebElement ButtonCreateAccount = driver.findElement(buttonCreateNewAccount);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", ButtonCreateAccount);
+        Thread.sleep(1000);
+        ButtonCreateAccount.click();
+    }
+
     By fieldEmail = By.xpath("//input[@id= 'ap_email']");
     public void inputFieldEmail (String input) throws InterruptedException {
         WebElement FieldEmail = driver.findElement(fieldEmail);
@@ -38,6 +46,24 @@ public class LoginPage extends TestBase {
         Thread.sleep(1000);
         FieldPassword.clear();
         FieldPassword.sendKeys(input);
+    }
+
+    By fieldRePassword = By.xpath("//input[@id= 'ap_password_check']");
+    public void inputFieldRePassword (String input) throws InterruptedException {
+        WebElement FieldRePassword = driver.findElement(fieldRePassword);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", FieldRePassword);
+        Thread.sleep(1000);
+        FieldRePassword.clear();
+        FieldRePassword.sendKeys(input);
+    }
+
+    By fieldYourName = By.xpath("//input[@id= 'ap_customer_name']");
+    public void inputFieldYourName (String input) throws InterruptedException {
+        WebElement FieldYourName = driver.findElement(fieldYourName);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", FieldYourName);
+        Thread.sleep(1000);
+        FieldYourName.clear();
+        FieldYourName.sendKeys(input);
     }
 
     By buttonAcceptSignIn = By.xpath("//span[@id = 'a-autoid-0']");
@@ -86,5 +112,13 @@ public class LoginPage extends TestBase {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", ButtonCheckKeepSignedIn);
         Thread.sleep(1000);
         ButtonCheckKeepSignedIn.click();
+    }
+
+    By h1VerifyEmail = By.xpath("//h1[text()= 'Verify email address']");
+    public boolean checkH1VerifyEmail_ISDP() throws InterruptedException {
+        WebElement CheckH1VerifyEmail = driver.findElement(h1VerifyEmail);
+        js.executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'nearest'})", CheckH1VerifyEmail);
+        Thread.sleep(1000);
+        return CheckH1VerifyEmail.isDisplayed();
     }
 }
