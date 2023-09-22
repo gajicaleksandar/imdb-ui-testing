@@ -1,17 +1,9 @@
 package TestBase;
 
-import Utility.ScreenShotOnFailure;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import com.aventstack.extentreports.reporter.configuration.ExtentSparkReporterConfig;
-import com.aventstack.extentreports.reporter.configuration.Theme;
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
-import org.openqa.selenium.By;
+import io.qameta.allure.Allure;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.ITestResult;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
@@ -20,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 public abstract class TestBase {
     public static JavascriptExecutor js;
     public static WebDriver driver;
+    String currentClass = String.valueOf(getClass());
 
     @BeforeTest
     public void setUp() throws InterruptedException {
@@ -40,12 +33,16 @@ public abstract class TestBase {
         driver.manage().deleteAllCookies();
         String baseURL = "https://www.imdb.com/";
         driver.get(baseURL);
-        System.out.println("- The Test " + getClass() + " is started!");
+        String testMessage1 = "- The Test " + currentClass + " is started!";
+            System.out.println(testMessage1);
+            Allure.step(testMessage1);
     }
 
     @AfterTest
     public void tearDown() {
-        System.out.println("- The test " + getClass() + " was finished!");
+        String testMessage = "- The test " + currentClass + " was finished!";
+            System.out.println(testMessage);
+            Allure.step(testMessage);
         driver.quit();
     }
 }

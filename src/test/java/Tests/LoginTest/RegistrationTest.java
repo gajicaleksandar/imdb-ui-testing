@@ -4,6 +4,7 @@ import Pages.Header;
 import Pages.LoginPage;
 import TestBase.TestBase;
 import Utility.ScreenShotOnFailure;
+import io.qameta.allure.Allure;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -43,10 +44,14 @@ public class RegistrationTest extends TestBase {
 
         if (ITestResult.FAILURE == result.getStatus()) {
             ScreenShotOnFailure.TakingScreenshot(driver, result.getName());
-            System.out.println("- The test " + getClass() + " failed!");
+            String testMessageFailed = "- The test " + getClass() + " failed!";
+                System.out.println(testMessageFailed);
+                Allure.step(testMessageFailed);
         }
         else {
-            System.out.println("- No errors");
+            String testMessageNoErrors = "- No errors";
+                System.out.println(testMessageNoErrors);
+                Allure.step(testMessageNoErrors);
         }
         /*
         A screenshot is captured only on failure in any test
@@ -64,7 +69,9 @@ public class RegistrationTest extends TestBase {
 
         Assert.assertTrue(Objects.equals(currentUrl, expectedUrl));
         if (currentUrl.equals(expectedUrl)) {
-            System.out.println("URL is correct!");
+            String testMessage1 = "URL is correct!";
+                System.out.println(testMessage1);
+                Allure.step(testMessage1);
         }
         header.clickOnButtonSignIn();
         loginPage.clickButtonCreateNewAccount();
@@ -78,6 +85,5 @@ public class RegistrationTest extends TestBase {
         loginPage.inputFieldRePassword(randomPassword);
         loginPage.clickButtonAcceptSignIn();
         Assert.assertTrue(loginPage.checkH1VerifyEmail_ISDP());
-        Thread.sleep(2000);
     }
 }

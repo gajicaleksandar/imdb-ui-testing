@@ -1,9 +1,10 @@
-package Tests.SmokeTest;
+package Tests;
 
 import Pages.Header;
 import Pages.LoginPage;
 import TestBase.TestBase;
 import Utility.ScreenShotOnFailure;
+import io.qameta.allure.Allure;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -13,7 +14,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.Objects;
 
-public class SmokeTest extends TestBase {
+public class WatchlistTest extends TestBase {
     Header header;
     LoginPage loginPage;
 
@@ -28,10 +29,14 @@ public class SmokeTest extends TestBase {
 
         if (ITestResult.FAILURE == result.getStatus()) {
             ScreenShotOnFailure.TakingScreenshot(driver, result.getName());
-            System.out.println("- The test " + getClass() + " failed!");
+            String testMessageFailed = "- The test " + getClass() + " failed!";
+                System.out.println(testMessageFailed);
+                Allure.step(testMessageFailed);
         }
         else {
-            System.out.println("- No errors");
+            String testMessageNoErrors = "- No errors";
+                System.out.println(testMessageNoErrors);
+                Allure.step(testMessageNoErrors);
         }
         /*
         A screenshot is captured only on failure in any test
@@ -48,7 +53,9 @@ public class SmokeTest extends TestBase {
 
         Assert.assertTrue(Objects.equals(currentUrl, expectedUrl));
         if (currentUrl.equals(expectedUrl)) {
-            System.out.println("URL is correct!");
+            String testMessage1 = "URL is correct!";
+                System.out.println(testMessage1);
+                Allure.step(testMessage1);
         }
         header.clickOnButtonSignIn();
         loginPage.clickOnSignInWithImdb();
@@ -66,8 +73,17 @@ public class SmokeTest extends TestBase {
 
     @Test
     public void test() throws InterruptedException {
+        String currentUrl = driver.getCurrentUrl();
+            System.out.println("Current URL: " + currentUrl);
+        String expectedUrl = "https://www.imdb.com/";
+            System.out.println("Expected URL: " + expectedUrl);
 
-        //step 2, this will continue - Watchlist test, translate test, search test, check pages, play video...
+        Assert.assertTrue(Objects.equals(currentUrl, expectedUrl));
+        if (currentUrl.equals(expectedUrl)) {
+            System.out.println("URL is correct!");
+        }
+        header.clickOnButtonWatchlist();
+        //continue...
 
     }
 
